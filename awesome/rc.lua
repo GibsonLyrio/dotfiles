@@ -542,8 +542,8 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- {{{ Custom autostart applications
+awful.spawn.with_shell("feh --bg-scale ~/dotfiles/backgrounds/black.png")
 awful.spawn.with_shell("~/.config/polybar/launch.sh")
 awful.spawn.with_shell("picom --config ~/.config/picom/picom.conf")
-awful.spawn.with_shell("feh --bg-scale ~/Backgrounds/black.png")
 -- }}}
 
