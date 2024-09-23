@@ -34,6 +34,7 @@ call plug#begin()
 
 Plug 'tpope/vim-sensible'
 Plug 'lambdalisue/suda.vim'
+Plug 'ap/vim-css-color'
 
 call plug#end()
 " }}}

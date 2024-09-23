@@ -56,7 +56,10 @@ fi
 # Using yay to install additional applications
 # ---------------------------------------------------------------------------- #
 echo "Installing applications with yay..."
-yay -S --noconfirm zsh zinit ttf-meslo-nerd asdf-vm fzf obsidian libreoffice pavucontrol rofi
+yay -S --noconfirm neovim neofetch firefox zsh zinit ttf-meslo-nerd asdf-vm fzf obsidian libreoffice pavucontrol rofi micro picom polybar rofi
+
+# setting vim-plug for neovim
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 # Set zsh as the default shell
 chsh -s /usr/bin/zsh
