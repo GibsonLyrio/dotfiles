@@ -192,13 +192,16 @@ globalkeys = gears.table.join(
 ------------------------
 -- Rofi (an app launcher)
   awful.key({ modkey }, "r", function() awful.util.spawn("rofi -show combi") end,
-    { description = "Open rofi", group = "Added - custom" }),
+    { description = "Open Rofi", group = "Added - custom" }),
+  -- Anki flashcard app
+  awful.key({ modkey }, "a", function() awful.util.spawn("anki") end,
+    { description = "Open Anki", group = "Added - custom" }),
   -- Browser Firefox
   awful.key({ modkey }, "b", function() awful.util.spawn("firefox") end,
-    { description = "Open firefox", group = "Added - custom" }),
+    { description = "Open Firefox", group = "Added - custom" }),
   -- Obsidian
   awful.key({ modkey }, "o", function() awful.util.spawn("obsidian") end,
-    { description = "Open obsidian", group = "Added - custom" }),
+    { description = "Open Obsidian", group = "Added - custom" }),
   -- Office libre
   awful.key({ modkey, "Shift" }, "o", function() awful.util.spawn("obsidian") end,
     { description = "Open LibreOffice", group = "Added - custom" }),
@@ -210,10 +213,10 @@ globalkeys = gears.table.join(
     { description = "Open volume controller", group = "Added - custom" }),
   -- Open terminal (alacritty)
   awful.key({ modkey, }, "Return", function() awful.spawn(terminal) end,
-    { description = "open a terminal", group = "Added - custom" }),
+    { description = "Open Terminal", group = "Added - custom" }),
   -- Open nvim
   awful.key({ modkey }, "n", function() awful.spawn(terminal .. " -e nvim") end,
-    { description = "Open neovim", group = "Added - custom" }),
+    { description = "Open Neovim", group = "Added - custom" }),
   ------------------------
   -- }}}
 
