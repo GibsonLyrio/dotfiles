@@ -27,6 +27,7 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Exports {{{
 export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # }}}
 
 # Add in zsh plugins
@@ -72,6 +73,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 alias ls='exa -la --icons'
 alias cat='bat'
 alias c='clear'
+alias py='python'
 
 # Shell integrations
 eval "$(fzf --zsh)"

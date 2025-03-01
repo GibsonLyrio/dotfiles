@@ -58,9 +58,20 @@ ln -s "$HOME/dotfiles/.zshrc" "$HOME/"
 # Add symbolic link to the /.lock.sh
 if [ -a "$HOME/.lock.sh" ]; then
   rm -rf "$HOME/.lock.sh"
-  echo "lock exist"
 fi
 ln -s "$HOME/dotfiles/.lock.sh" "$HOME/"
+
+# Add symbolic link to the /.xinitrc
+if [ -a "$HOME/.xinitrc" ]; then
+  rm -rf "$HOME/.xinitrc"
+fi
+ln -s "$HOME/dotfiles/.xinitrc" "$HOME/"
+
+# Add symbolic link to the /.bash_profile
+if [ -a "$HOME/.bash_profile" ]; then
+  rm -rf "$HOME/.bash_profile"
+fi
+ln -s "$HOME/dotfiles/.bash_profile" "$HOME/"
 
 # Stow configuration files
 stow_configs
@@ -87,7 +98,7 @@ fi
 # Using yay to install additional applications
 # ---------------------------------------------------------------------------- #
 echo "Installing applications with yay..."
-yay -S --noconfirm amd-ucode man-db man-pages texinfo neovim neofetch firefox zsh zinit ttf-meslo-nerd asdf-vm fzf obsidian libreoffice pavucontrol xclip rofi micro picom polybar rofi feh scrot i3lock imagemagick
+yay -S --noconfirm amd-ucode man-db man-pages texinfo neovim neofetch docker openssh discord firefox zsh zinit ttf-meslo-nerd asdf-vm fzf obsidian libreoffice anki pavucontrol xclip rofi micro picom polybar rofi feh scrot i3lock imagemagick flameshot
 
 # setting vim-plug for neovim
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
