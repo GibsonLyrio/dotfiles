@@ -25,9 +25,19 @@ if [ ! -d "$HOME/dotfiles" ]; then
   }
 fi
 
+# Create ~/.config directory (if not already exists)
+if [ ! -d "$HOME/.config" ]; then
+  cd $HOME
+  mkdir .config || {
+    echo "[script] >>> Failed to create .config directory"
+    exit 1
+  }
+fi
+
 # Change to dotfiles directory
 cd "$HOME/dotfiles" || {
   echo "[script] >>> Failed to change to dotfiles directory"
+  echo "[script] >>> TIP: Verify if dotfiles was cloned correctly"
   exit 1
 }
 
