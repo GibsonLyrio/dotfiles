@@ -8,88 +8,51 @@
 set -e
 
 # ---------------------------------------------------------------------------- #
-# Functions
+# Main script
 # ---------------------------------------------------------------------------- #
-
-# Function to create directories and stow configs
-stow_configs() {
-  local dirs=("alacritty" "awesome" "backgrounds" "micro" "nvim" "picom" "polybar" "rofi")
-
-  # Loop through directories
-  for dir in "${dirs[@]}"; do
-    mkdir -p "$HOME/.config/$dir" || {
-      echo "Failed to create $dir directory"
-      exit 1
-    }
-    stow "$dir" -t "$HOME/.config/$dir" || {
-      echo "Stow failed for $dir"
-      exit 1
-    }
-  done
-}
-
-# ---------------------------------------------------------------------------- #
-# Main Script
-# ---------------------------------------------------------------------------- #
+echo "------------------------------------------------------------------------"
+echo "[script] >>> Starting install script..."
+echo "------------------------------------------------------------------------"
 
 # Update pacman and install stow
-sudo pacman -Syu --noconfirm stow
+sudo pacman -Syu --noconfirm --needed stow
 
 # Clone dotfiles (if not already cloned)
 if [ ! -d "$HOME/dotfiles" ]; then
   git clone https://github.com/GibsonLyrio/dotfiles.git "$HOME/dotfiles" || {
-    echo "Failed to clone dotfiles"
+    echo "[script] >>> Failed to clone dotfiles"
     exit 1
   }
 fi
 
 # Change to dotfiles directory
 cd "$HOME/dotfiles" || {
-  echo "Failed to change to dotfiles directory"
+  echo "[script] >>> Failed to change to dotfiles directory"
   exit 1
 }
 
-# Add symbolic link to the /.zshrc
-if [ -a "$HOME/.zshrc" ]; then
-  rm -rf "$HOME/.zshrc"
-fi
-ln -s "$HOME/dotfiles/.zshrc" "$HOME/"
-
-# Add symbolic link to the /.lock.sh
-if [ -a "$HOME/.lock.sh" ]; then
-  rm -rf "$HOME/.lock.sh"
-fi
-ln -s "$HOME/dotfiles/.lock.sh" "$HOME/"
-
-# Add symbolic link to the /.xinitrc
-if [ -a "$HOME/.xinitrc" ]; then
-  rm -rf "$HOME/.xinitrc"
-fi
-ln -s "$HOME/dotfiles/.xinitrc" "$HOME/"
-
-# Add symbolic link to the /.bash_profile
-if [ -a "$HOME/.bash_profile" ]; then
-  rm -rf "$HOME/.bash_profile"
-fi
-ln -s "$HOME/dotfiles/.bash_profile" "$HOME/"
-
 # Stow configuration files
-stow_configs
+stow . || {
+  echo "[script] >>> Failed to stow config"
+  exit 1
+}
 
 # ---------------------------------------------------------------------------- #
 # Installing yay (AUR helper)
 # ---------------------------------------------------------------------------- #
-echo "Installing yay..."
-sudo pacman -S --needed --noconfirm base-devel git neovim rust
-if [ ! -d "/tmp/yay" ]; then
+echo "------------------------------------------------------------------------"
+echo "[script] >>> Installing yay..."
+sudo pacman -S --noconfirm --needed base-devel git
+
+if ! command -v yay &>/dev/null; then
   cd /tmp
   git clone https://aur.archlinux.org/yay.git || {
-    echo "Failed to clone yay"
+    echo "[script] >>> Failed to clone yay"
     exit 1
   }
   cd yay
   makepkg -si --noconfirm || {
-    echo "Failed to install yay"
+    echo "[script] >>> Failed to install yay"
     exit 1
   }
 fi
@@ -97,8 +60,27 @@ fi
 # ---------------------------------------------------------------------------- #
 # Using yay to install additional applications
 # ---------------------------------------------------------------------------- #
-echo "Installing applications with yay..."
-yay -S --noconfirm amd-ucode man-db man-pages texinfo neovim neofetch docker openssh discord firefox zsh zinit ttf-meslo-nerd asdf-vm fzf obsidian libreoffice anki pavucontrol xclip rofi micro picom polybar rofi feh scrot i3lock imagemagick flameshot
+echo "------------------------------------------------------------------------"
+echo "[script] >>> Installing applications with yay..."
+
+echo "[script] >>> AMD micro code, manual pages..."
+yay -S --noconfirm --needed amd-ucode man-db man-pages texinfo
+
+echo "------------------------------------------------------------------------"
+echo "[script] >>> System utils..."
+yay -S --noconfirm --needed pavucontrol waybar wofi
+
+echo "------------------------------------------------------------------------"
+echo "[script] >>> Terminal utils..."
+yay -S --noconfirm --needed btop neofetch zsh zinit ttf-meslo-nerd fzf
+
+echo "------------------------------------------------------------------------"
+echo "[script] >>> User apps..."
+yay -S --noconfirm --needed discord firefox obsidian libreoffice
+
+echo "------------------------------------------------------------------------"
+echo "[script] >>> Dev tools..."
+yay -S --noconfirm --needed neovim micro docker openssh asdf-vm
 
 # setting vim-plug for neovim
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -106,8 +88,10 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 # ---------------------------------------------------------------------------- #
 # Using cargo to install `exa` and `bat`
 # ---------------------------------------------------------------------------- #
+echo "------------------------------------------------------------------------"
+echo "[script] >>> Installing 'exa' and 'bat'"
 if ! command -v cargo &>/dev/null; then
-  echo "Cargo not found, installing rust..."
+  echo "[script] >>> Cargo not found, installing rust..."
   sudo pacman -S --noconfirm rust
 fi
 
@@ -116,8 +100,10 @@ cargo install exa bat
 # ---------------------------------------------------------------------------- #
 # Final Steps
 # ---------------------------------------------------------------------------- #
-echo "Install script finished!"
-echo "Remember to set up new SSH keys and other important things."
+echo "------------------------------------------------------------------------"
+echo "[script] >>> Install script finished!"
+echo "[script] >>> Remember to set up new SSH keys and other important things."
+echo "------------------------------------------------------------------------"
 
 # ---------------------------------------------------------------------------- #
 # End of script
