@@ -19,34 +19,34 @@ sudo pacman -Syu --noconfirm --needed stow
 
 # Clone dotfiles (if not already cloned)
 if [ ! -d "$HOME/dotfiles" ]; then
-  git clone https://github.com/GibsonLyrio/dotfiles.git "$HOME/dotfiles" || {
-    echo "[script] >>> Failed to clone dotfiles."
-    exit 1
-  }
+	git clone https://github.com/GibsonLyrio/dotfiles.git "$HOME/dotfiles" || {
+		echo "[script] >>> Failed to clone dotfiles."
+		exit 1
+	}
 fi
 
 # Create ~/.config directory (if not already exists)
 if [ ! -d "$HOME/.config" ]; then
-  cd $HOME
-  mkdir .config || {
-    echo "[script] >>> Failed to create .config directory."
-    exit 1
-  }
+	cd $HOME
+	mkdir .config || {
+		echo "[script] >>> Failed to create .config directory."
+		exit 1
+	}
 fi
 
 # Change to dotfiles directory
 cd "$HOME/dotfiles" || {
-  echo "[script] >>> Failed to change to dotfiles directory."
-  echo "[script] >>> HINT: Verify if dotfiles was cloned correctly."
-  exit 1
+	echo "[script] >>> Failed to change to dotfiles directory."
+	echo "[script] >>> HINT: Verify if dotfiles was cloned correctly."
+	exit 1
 }
 
 # Stow configuration files
 stow . || {
-  echo "[script] >>> Failed to stow config."
-  echo "[script] >>> HINT: If some target already exist,"
-  echo "[script] >>>   move to a backup, and run again this script."
-  exit 1
+	echo "[script] >>> Failed to stow config."
+	echo "[script] >>> HINT: If some target already exist,"
+	echo "[script] >>>   move to a backup, and run again this script."
+	exit 1
 }
 
 # ---------------------------------------------------------------------------- #
@@ -57,16 +57,16 @@ echo "[script] >>> Installing yay..."
 sudo pacman -S --noconfirm --needed base-devel git
 
 if ! command -v yay &>/dev/null; then
-  cd /tmp
-  git clone https://aur.archlinux.org/yay.git || {
-    echo "[script] >>> Failed to clone yay."
-    exit 1
-  }
-  cd yay
-  makepkg -si --noconfirm || {
-    echo "[script] >>> Failed to install yay."
-    exit 1
-  }
+	cd /tmp
+	git clone https://aur.archlinux.org/yay.git || {
+		echo "[script] >>> Failed to clone yay."
+		exit 1
+	}
+	cd yay
+	makepkg -si --noconfirm || {
+		echo "[script] >>> Failed to install yay."
+		exit 1
+	}
 fi
 
 # ---------------------------------------------------------------------------- #
@@ -84,7 +84,7 @@ yay -S --noconfirm --needed pavucontrol waybar wofi
 
 echo "------------------------------------------------------------------------"
 echo "[script] >>> Terminal utils..."
-yay -S --noconfirm --needed btop neofetch zsh zinit ttf-meslo-nerd fzf
+yay -S --noconfirm --needed alacritty btop neofetch zsh zinit ttf-meslo-nerd fzf
 
 echo "------------------------------------------------------------------------"
 echo "[script] >>> User apps..."
@@ -103,8 +103,8 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 echo "------------------------------------------------------------------------"
 echo "[script] >>> Installing 'exa' and 'bat'."
 if ! command -v cargo &>/dev/null; then
-  echo "[script] >>> Cargo not found, installing rust..."
-  sudo pacman -S --noconfirm rust
+	echo "[script] >>> Cargo not found, installing rust..."
+	sudo pacman -S --noconfirm rust
 fi
 
 cargo install exa bat
