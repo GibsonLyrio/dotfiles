@@ -44,13 +44,19 @@ zinit cdreplay -q
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+
+# -----------------------------------------------------------------------------
 # Keybindings
+# -----------------------------------------------------------------------------
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
 
+
+# -----------------------------------------------------------------------------
 # History
+# -----------------------------------------------------------------------------
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
@@ -63,17 +69,46 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+
+# -----------------------------------------------------------------------------
 # Completion styling
+# -----------------------------------------------------------------------------
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
+
+# -----------------------------------------------------------------------------
 # Aliases
+# -----------------------------------------------------------------------------
+
+# General
+#
 alias ls='exa -la --icons'
 alias cat='bat'
 alias c='clear'
 alias py='python'
 
+# Git aliases
+#
+alias gtin='git init'
+alias gtcl='git clone'
+
+alias gtpu='git pull'
+alias gtft='git fetch'
+alias gtps='git push'
+
+alias gtst='git status'
+alias gtbr='git branch'
+
+alias gtad='git add'
+alias gtcm='git commit'
+alias gtdf='git diff'
+
+
+# -----------------------------------------------------------------------------
 # Shell integrations
+# -----------------------------------------------------------------------------
 eval "$(fzf --zsh)"
+
