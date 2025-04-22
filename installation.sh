@@ -80,7 +80,7 @@ yay -S --noconfirm --needed amd-ucode man-db man-pages texinfo
 
 echo "------------------------------------------------------------------------"
 echo "[script] >>> System utils..."
-yay -S --noconfirm --needed pavucontrol waybar wofi swaync libnotify wl-clipboard
+yay -S --noconfirm --needed pavucontrol waybar wofi swaync libnotify wl-clipboard ttf-font-awesome
 
 echo "------------------------------------------------------------------------"
 echo "[script] >>> Terminal utils..."
