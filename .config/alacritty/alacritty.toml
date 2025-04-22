@@ -1,8 +1,4 @@
 general.import = [
-  # uncomment the flavour you want below:
-  # "~/.config/alacritty/catppuccin-latte.toml"
-  # "~/.config/alacritty/catppuccin-frappe.toml"
-  # "~/.config/alacritty/catppuccin-macchiato.toml"
   "~/.config/alacritty/catppuccin-mocha.toml"
 ]
 
@@ -10,6 +6,7 @@ general.import = [
 program = "/usr/bin/zsh"
 
 [window]
+opacity = 0.8
 decorations = "buttonless"
 dynamic_padding = false
 
