@@ -103,7 +103,6 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 # Setting i2c-dev for ddcutil
 sudo modprobe i2c-dev
 echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf
-sudo usermod -aG i2c $USER
 
 # ---------------------------------------------------------------------------- #
 # Installing languages with asdf
@@ -134,11 +133,18 @@ asdf set -u rust latest
 # Add user to some groups
 # ---------------------------------------------------------------------------- #
 sudo usermod -aG input $USER
+sudo usermod -aG i2c $USER
+
+# ---------------------------------------------------------------------------- #
+# Creating ssh key for github
+# ---------------------------------------------------------------------------- #
+echo "------------------------------------------------------------------------"
+echo "[script] >>> Creating a SSH Key for GitHub..."
+ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "gibsonlyrio@pm.me"
 
 # ---------------------------------------------------------------------------- #
 # Final Steps
 # ---------------------------------------------------------------------------- #
 echo "------------------------------------------------------------------------"
 echo "[script] >>> Install script finished! Reboot the system."
-echo "[script] >>> Remember to set up new SSH keys and other important things."
 echo "------------------------------------------------------------------------"
