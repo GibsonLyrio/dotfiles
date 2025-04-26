@@ -79,7 +79,7 @@ yay -S --noconfirm --needed amd-ucode man-db man-pages texinfo
 
 echo "------------------------------------------------------------------------"
 echo "[script] >>> System utils..."
-yay -S --noconfirm --needed pavucontrol waybar wofi swaync libnotify wl-clipboard ttf-font-awesome
+yay -S --noconfirm --needed ddcutil pavucontrol waybar wofi swaync libnotify wl-clipboard ttf-font-awesome
 
 echo "------------------------------------------------------------------------"
 echo "[script] >>> Terminal utils..."
@@ -99,6 +99,11 @@ yay -S --noconfirm --needed hypridle hyprpaper hyprlock
 
 # setting vim-plug for neovim
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+# Setting i2c-dev for ddcutil
+sudo modprobe i2c-dev
+echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf
+sudo usermod -aG i2c $USER
 
 # ---------------------------------------------------------------------------- #
 # Installing languages with asdf
