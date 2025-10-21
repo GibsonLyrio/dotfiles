@@ -72,30 +72,14 @@ fi
 # Using yay to install additional applications
 # ---------------------------------------------------------------------------- #
 echo "------------------------------------------------------------------------"
-echo "[script] >>> Installing applications with yay..."
+echo "[script] >>> Installing core applications with yay..."
 
-echo "[script] >>> AMD micro code, manual pages..."
-yay -S --noconfirm --needed amd-ucode man-db man-pages texinfo
+CORE_PACKAGES="amd-ucode man-db man-pages texinfo ddcutil pavucontrol"
+TERM_PACKAGES="kitty zsh zinit fzf btop neofetch ttf-meslo-nerd"
+APPS_PACKAGES="neovim micro openssh asdf-vm discord firefox libreoffice docker"
+I3WM_PACKAGES="xorg xinit i3-wm i3status rofi picom feh"
 
-echo "------------------------------------------------------------------------"
-echo "[script] >>> System utils..."
-yay -S --noconfirm --needed ddcutil pavucontrol waybar wofi swaync libnotify wl-clipboard ttf-font-awesome
-
-echo "------------------------------------------------------------------------"
-echo "[script] >>> Terminal utils..."
-yay -S --noconfirm --needed alacritty btop neofetch zsh zinit ttf-meslo-nerd fzf
-
-echo "------------------------------------------------------------------------"
-echo "[script] >>> User apps..."
-yay -S --noconfirm --needed discord firefox obsidian libreoffice
-
-echo "------------------------------------------------------------------------"
-echo "[script] >>> Dev tools..."
-yay -S --noconfirm --needed neovim micro docker openssh asdf-vm
-
-echo "------------------------------------------------------------------------"
-echo "[script] >>> Hyprland utils..."
-yay -S --noconfirm --needed hypridle hyprpaper hyprlock
+yay -S --noconfirm --needed $CORE_PACKAGES $TERM_PACKAGES $APPS_PACKAGES $I3WM_PACKAGES
 
 # setting vim-plug for neovim
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
