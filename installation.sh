@@ -127,6 +127,22 @@ echo "[script] >>> Creating a SSH Key for GitHub..."
 ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "gibsonlyrio@pm.me"
 
 # ---------------------------------------------------------------------------- #
+# Setting up git
+# ---------------------------------------------------------------------------- #
+echo "------------------------------------------------------------------------"
+echo "[script] >>> Creating git global variables..."
+
+read -r -p "[script] >>> Enter NAME for GIT: " GIT_NAME
+read -r -p "[script] >>> Enter EMAIL for GIT: " GIT_EMAIL
+
+git config --global user.name "$GIT_NAME"
+git config --global user.email "$GIT_EMAIL"
+
+echo "------------------------------------------------------"
+echo "[script] >>> Config aplied:"
+git config --list | grep "user\."
+
+# ---------------------------------------------------------------------------- #
 # Final Steps
 # ---------------------------------------------------------------------------- #
 echo "------------------------------------------------------------------------"
