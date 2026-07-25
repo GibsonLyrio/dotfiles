@@ -27,6 +27,8 @@ SH_DIR="${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
 LC_BIN="$HOME/.local/bin"
 
 export PATH="$PATH:$SH_DIR:$LC_BIN"
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # Append asdf-vm completions to fpath
 fpath=($fpath ${ASDF_DATA_DIR:-$HOME/.asdf}/completions)
